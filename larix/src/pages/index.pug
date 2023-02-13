@@ -1,0 +1,174 @@
+extends blocks/_layout
+
+block contentVars 
+    -
+        const typesList = [
+            {
+                title: 'Палубная доска',
+                text: 'Это традиционное напольное покрытие для открытых помещений (терраса, веранда) или помещений с высокой влажностью. Главным отличием является особенный рельеф на лицевой стороне. Такая обработка исключает скольжение при любых погодных условиях. ',
+                imgSrc: 'products/2.png'
+            },
+            {
+                title: 'Палубная доска',
+                text: 'Это традиционное напольное покрытие для открытых помещений (терраса, веранда) или помещений с высокой влажностью. Главным отличием является особенный рельеф на лицевой стороне. Такая обработка исключает скольжение при любых погодных условиях. ',
+                imgSrc: 'products/2.png'
+            },
+            {
+                title: 'Палубная доска',
+                text: 'Это традиционное напольное покрытие для открытых помещений (терраса, веранда) или помещений с высокой влажностью. Главным отличием является особенный рельеф на лицевой стороне. Такая обработка исключает скольжение при любых погодных условиях. ',
+                imgSrc: 'products/2.png'
+            },
+        ]
+    -
+        const sidebarList = [
+            {
+                title: 'Брус обрезной', 
+                types: [
+                    {
+                        title: 'Брус сухой обрезной',
+                        types: [
+                            {title: 'new type1'},
+                            {title: 'new type2'},
+                            {title: 'new type3'}
+                        ]
+                    },
+                    {title: 'Брус сухой строганый'},
+                    {title: 'Брус строганый'},
+                    {title: 'Брус клееный'},
+                    {title: 'Брус профилированный'},
+                    {title: 'Профбрус камерной сушки'},
+                ]
+            },
+            {
+                title: 'Доска',
+                types: [
+                    {title: 'Брус сухой обрезной'},
+                    {title: 'Брус сухой строганый'},
+                    {title: 'Брус строганый'},
+                    {title: 'Брус клееный'},
+                    {title: 'Брус профилированный'},
+                    {title: 'Профбрус камерной сушки'}
+                    ]
+            },
+            {title: 'Брусок'},
+            {title: 'Фанера'},
+            {title: 'Фасадный планкен'},
+        ]
+    -
+        const propertyList = [
+            {
+                title: 'Прочность древесины',
+                text: 'Лиственница имеет уникальную прочность и твёрдость, возрастающую со временем.'
+            },
+            {
+                title: 'Устойчивость к внешним факторам',
+                text: 'Переносит температурные перепады, влажность и другие негативные воздействия. Древесина огнестойка.'
+            },
+            {
+                title: 'Надежная теплоизоляция',
+                text: 'В холода лиственница сохраняет тепло, а в тёплую погоду в доме царит приятная прохлада.'
+            },
+        ]
+    -
+        const servicesList = [
+            {
+                title: 'Антисептирование',
+            },
+            {
+                title: 'Огнезащитная обработка',
+            },
+            {
+                title: 'Изготовление по размерам заказчика',
+            },
+            {
+                title: 'доставка',
+            },
+        ]
+        const servicesImageSrc = 'services'
+    -
+        const discountList = [
+            {
+                title: 'Доска сухая',
+                type: 'Лиственница',
+                price: 9000,
+            },
+            {
+                title: 'Доска сухая',
+                type: 'Лиственница',
+                price: 9000,
+            },
+            {
+                title: 'Доска сухая',
+                type: 'Лиственница',
+                price: 9000,
+            },
+            {
+                title: 'Доска сухая',
+                type: 'Лиственница',
+                price: 9000,
+            },
+        ]
+        const discountImageSrc = 'products/1.png'
+block content
+    .hello-section
+        .titles 
+            h1.title Лиственница #[span опт]
+            h3.subtitle Москва и Московская  область
+        .desc Погонажные изделия из Сибирской лиственницы оптом
+        .showcase 
+            +image('showcase.png')
+    
+    section.section.section-about 
+        h2.section__title О компании
+        .content
+            p.section__text Хвойные деревья семейства сосновых давно зарекомендовали себя фаворитами в строительной сфере. Купить продукцию из лиственницы стремятся многие строительные организации и частные лица. Высота этих деревьев достигает 45 метров, а диаметр прямостоящего столба более 1 метра. Востребованность этой породы обусловлена её приемлемой ценой и качественными характеристиками:
+            +image('about.png','section__image')
+            +link('Узнать больше', '#', 'section__link circle')
+    
+    section.section.section-types 
+        h2.section__title лиственница #[span премиального] #[span качества]
+        +accordionInfo(typesList)
+    
+    section.section.section-properties 
+        h2.section__title Удивительные #[span.not-colored свойства] #[span лиственницы]
+        .property-list
+            each property in propertyList 
+                .property 
+                    h3.property__title= property.title
+                    p.property__text= property.text
+    
+    section.section.section-services 
+        h2.section__title Услуги
+        .service-list 
+            each service, index in servicesList 
+                .service
+                    +image(`${servicesImageSrc}/${index+1}.png`, 'service__image')
+                    h3.service__title= service.title
+    
+    section.section.section-discount 
+        h2.section__title Акции
+        .discount-items
+            each card in discountList
+                +card(discountImageSrc, card.title, card.type, card.price, false)   
+        +link('Смотреть все', '#', 'section__link')
+    
+    section.section.section-special
+        h2.section__title Есть вопросы?
+        form.form
+            .form__title Наши специалисты свяжутся с вами в ближайшее время
+            .form__input-container
+                input.form__input(type='text', placeholder='Имя' )
+                input.form__input(type='tel', placeholder='Телефон' )
+                input.form__input(type='email', placeholder='E-mail' )
+                select.form__select(name="") 
+                    option телефон
+                    option мобила
+                    option кирпич
+                textarea.form__textarea(placeholder='Ваш комментарий')
+            +button('отправить', 'button--half button--padding', '#', 'submit')
+        
+
+        
+
+
+

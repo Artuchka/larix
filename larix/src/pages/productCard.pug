@@ -1,0 +1,162 @@
+extends blocks/_layout
+
+block contentVars 
+    -
+        const sidebarList = [
+            {
+                title: 'Брус обрезной', 
+                types: [
+                    {
+                        title: 'Брус сухой обрезной',
+                        types: [
+                            {title: 'new type1'},
+                            {title: 'new type2'},
+                            {title: 'new type3'}
+                        ]
+                    },
+                    {title: 'Брус сухой строганый'},
+                    {title: 'Брус строганый'},
+                    {title: 'Брус клееный'},
+                    {title: 'Брус профилированный'},
+                    {title: 'Профбрус камерной сушки'},
+                ]
+            },
+            {
+                title: 'Доска',
+                types: [
+                    {title: 'Брус сухой обрезной'},
+                    {title: 'Брус сухой строганый'},
+                    {title: 'Брус строганый'},
+                    {title: 'Брус клееный'},
+                    {title: 'Брус профилированный'},
+                    {title: 'Профбрус камерной сушки'}
+                    ]
+            },
+            {title: 'Брусок'},
+            {title: 'Фанера'},
+            {title: 'Фасадный планкен'},
+        ]
+    -
+        const productProperties = [
+            {
+                name: 'Порода дерева',
+                value: 'Лиственница',
+            },
+            {
+                name: 'Сорт древесины',
+                value: '1-2 ГОСТ 8486-86',
+            },
+            { 
+                name: 'Влажность',
+                value: 'Cухая',
+            },
+            {
+                name: 'Стоимость',
+                value: 'От 8000 ₽/м3',
+            },
+        ]
+    -
+        const sizeList = [
+            {
+                width: 100,
+                height: 100,
+            },
+            {
+                width: 100,
+                height: 100,
+            },
+            {
+                width: 100,
+                height: 100,
+            },
+            {
+                width: 100,
+                height: 100,
+            },
+            {
+                width: 100,
+                height: 100,
+                isAvailable: false,
+            },
+        ]
+    -
+        const productTable = {
+            headers: [
+                'Размер',
+                'Порода дерева',
+                'Сорт',
+                'Стоимость за куб',
+                ' ',
+            ],
+            data: [
+                {
+                    size: '100х100х6000',
+                    name: 'Лиственница',
+                    sort: '1 - 2',
+                    price: '18 500 ₽',
+                    buttonText: 'Заказать',
+                },
+                {
+                    size: '100х100х6000',
+                    name: 'Лиственница',
+                    sort: '1 - 2',
+                    price: '18 500 ₽',
+                    buttonText: 'Заказать',
+                },
+                {
+                    size: '100х100х6000',
+                    name: 'Лиственница',
+                    sort: '1 - 2',
+                    price: '18 500 ₽',
+                    buttonText: 'Заказать',
+                },
+                {
+                    size: '100х100х6000',
+                    name: 'Лиственница',
+                    sort: '1 - 2',
+                    price: '18 500 ₽',
+                    buttonText: 'Заказать',
+                },
+                {
+                    size: '100х100х6000',
+                    name: 'Лиственница',
+                    sort: '1 - 2',
+                    price: '18 500 ₽',
+                    buttonText: 'Заказать',
+                },
+            ]
+        }
+
+
+block content 
+    .workspace 
+        aside.sidebar
+            +accordion(sidebarList)
+        .product 
+            .product-card 
+                .product-card__image
+                    +image('products/3.png')
+                .product-card__desc 
+                    h2.desc__name Брус сухой обрезной
+                    ul.desc__list
+                        each property in productProperties
+                            li.property 
+                                .property__name= property.name 
+                                .property__dots
+                                .property__value= property.value
+                    .desc__tip Цены и наличие продукции на складе уточняйте дополнительно
+                    +buttonModal('Уточнить наличие и стоимость', 'button--half product-card__button')
+
+            .product-sizes
+                .title Доступные размеры:
+                ul.sizes-list 
+                    each size in sizeList 
+                        if (size.isAvailable == undefined)
+                            li.size= `${size.height} x ${size.width}`
+                        else if (size.isAvailable == false)
+                            li.size.dark= `${size.height} x ${size.width}`
+
+            .product-table 
+                +table(productTable)
+
+          

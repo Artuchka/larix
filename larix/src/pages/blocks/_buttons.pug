@@ -1,0 +1,10 @@
+mixin button(_text='click me', _classes='button', _href='#', _type)
+    if (_type == 'submit')
+        button.button(class=_classes, type=_type)= _text
+    else 
+        button.button(class=_classes, type=_type)
+            a(href=_href)= _text
+        
+mixin buttonModal(_text, _class)
+    button.button(data-modal-open-btn, class=_class)
+        a(href=_href)= _text
